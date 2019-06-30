@@ -3,19 +3,19 @@ import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
 import uuid from 'uuid/v4';
 
-export const getdata: APIGatewayProxyHandler = async (event, _context) => {
+export const getdata: APIGatewayProxyHandler = async (event:any, _context:any) => {
   const queryParams = event.queryStringParameters.id;
   console.log('queryParams', queryParams);
   return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
-      data:  getVehicleInfo(queryParams, data)
+      data:  getVehicleInfo(queryParams, userPostedData)
     }, null, 2),
   };
 }
 
-export const postdata: APIGatewayProxyHandler = async (event, _context) => {
+export const postdata: APIGatewayProxyHandler = async (event:any, _context:any) => {
   const userData = event.body;
   console.log('queryParams', userData);
   postData(userData);
@@ -30,19 +30,19 @@ export const postdata: APIGatewayProxyHandler = async (event, _context) => {
 }
 
 const postData = (d) => {
-  data.push(d);
-  console.log('DATA', data);
+  userPostedData.push(d);
+  console.log('DATA', userPostedData);
 }
 
-function getVehicleInfo(nameKey: any, myArray: any){
-  for (var i=0; i < myArray.length; i++) {
-      if (myArray[i].id == nameKey) {
-          return myArray[i];
+function getVehicleInfo(idKey: any, dataArray: any){
+  for (var i=0; i < dataArray.length; i++) {
+      if (dataArray[i].id == idKey) {
+          return dataArray[i];
       }
   }
 }
 
-const data = [
+const userPostedData:any = [
   {
   id: 111,
   modle : 'Atlas',
