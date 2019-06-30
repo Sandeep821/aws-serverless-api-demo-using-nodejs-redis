@@ -16,7 +16,9 @@ export const getdata: APIGatewayProxyHandler = async (event, _context) => {
 }
 
 export const postdata: APIGatewayProxyHandler = async (event, _context) => {
-  const queryParams = event.queryStringParameters;
+  const userData = event.body;
+  console.log('queryParams', userData);
+  postData(userData);
   console.log('queryParams', event.body);
   return {
     statusCode: 200,
@@ -27,8 +29,10 @@ export const postdata: APIGatewayProxyHandler = async (event, _context) => {
   };
 }
 
-
-
+const postData = (d) => {
+  data.push(d);
+  console.log('DATA', data);
+}
 
 function getVehicleInfo(nameKey: any, myArray: any){
   for (var i=0; i < myArray.length; i++) {
