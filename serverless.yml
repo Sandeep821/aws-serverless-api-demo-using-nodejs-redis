@@ -1,0 +1,36 @@
+service:
+  name: vci-ofa-data-transfer
+#app: your-app-name
+#tenant: your-tenant-name
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+
+functions:
+  getdata:
+    handler: handler.getdata
+    timeout: 5
+    events:
+      - http:
+          method: get
+          path: getdata
+  postdata:        
+    handler: handler.postdata
+    timeout: 5
+    events:
+      - http:
+          method: post
+          path: postdata       
+custom:
+  serverless-offline:
+    # httpsProtocol: "dev-certs"
+    port: 5000
+    host: 'localhost'
+    Path: /

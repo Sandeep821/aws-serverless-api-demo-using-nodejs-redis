@@ -1,0 +1,25 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:latest",
+        "tslint-sonarts",
+        "tslint-config-airbnb",
+        "tslint-config-prettier"
+    ],
+    "jsRules": {},
+    "rules": {
+        "max-classes-per-file": [
+            true,
+            5,
+            "exclude-class-expressions"
+        ],
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "any",
+                "named-imports-order": "case-insensitive"
+            }
+        ]
+    },
+    "rulesDirectory": []
+}

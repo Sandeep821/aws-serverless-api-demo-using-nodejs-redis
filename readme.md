@@ -1,0 +1,1 @@
+run serverless function locally : serverless invoke local --function functionName
