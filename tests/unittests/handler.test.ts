@@ -12,13 +12,20 @@ const event: APIGatewayProxyEvent = {
     },
     requestContext: null,
     resource: null,
-    stageVariables: null,
+    stageVariables: null
 };
 const context: Context = null;
 
-describe('handler tests: verify status codes', async () => {
+describe('handler getdata: verify status codes', async () => {
     test('verify if status code is 200 : if no errors are found', async () => {
         const testResponse: any = handler.getdata(event, context, null);
+        expect(testResponse.statusCode).toBe(200);
+    });
+});
+
+describe('handler datatransfer: verify status codes', async () => {
+    test('verify if status code is 200 : if no errors are found', async () => {
+        const testResponse: any = handler.datatransfer(event, context, null);
         expect(testResponse.statusCode).toBe(200);
     });
 });

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\src\vci-ofa-data-transfer\tests\unittests\handler.test.ts">
-    <testCase name="handler tests: verify status codes verify if status code is 200 : if no errors are found" duration="20">
+  <file path="/Users/sandeepsoni/src/vci-ofa-data-transfer-test/tests/unittests/handler.test.ts">
+    <testCase name="handler getdata: verify status codes verify if status code is 200 : if no errors are found" duration="27">
       <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
 
 Expected: 200
@@ -10,15 +10,32 @@ Received: undefined
 Difference:
 
   Comparing two different types of values. Expected number but received undefined.
-    at Object.test (C:\src\vci-ofa-data-transfer\tests\unittests\handler.test.ts:23:41)
-    at Object.asyncJestTest (C:\src\vci-ofa-data-transfer\node_modules\jest-jasmine2\build\jasmine_async.js:108:37)
-    at resolve (C:\src\vci-ofa-data-transfer\node_modules\jest-jasmine2\build\queue_runner.js:56:12)
+    at Object.test (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/tests/unittests/handler.test.ts:20:41)
+    at Object.asyncJestTest (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/jasmine_async.js:108:37)
+    at resolve (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/queue_runner.js:56:12)
     at new Promise (<anonymous>)
-    at mapper (C:\src\vci-ofa-data-transfer\node_modules\jest-jasmine2\build\queue_runner.js:43:19)
-    at promise.then (C:\src\vci-ofa-data-transfer\node_modules\jest-jasmine2\build\queue_runner.js:87:41)
+    at mapper (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/queue_runner.js:43:19)
+    at promise.then (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/queue_runner.js:87:41)
     at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]></failure>
+    at process._tickCallback (internal/process/next_tick.js:189:7)]]></failure>
     </testCase>
-    <testCase name="handler tests: verify status codes verify if status code is 200 : if no errors are found" duration="1"/>
+    <testCase name="handler datatransfer: verify status codes verify if status code is 200 : if no errors are found" duration="11">
+      <failure message="Error: expect(received).toBe(expected) // Object.is equality"><![CDATA[Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: 200
+Received: undefined
+
+Difference:
+
+  Comparing two different types of values. Expected number but received undefined.
+    at Object.test (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/tests/unittests/handler.test.ts:26:41)
+    at Object.asyncJestTest (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/jasmine_async.js:108:37)
+    at resolve (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/queue_runner.js:56:12)
+    at new Promise (<anonymous>)
+    at mapper (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/queue_runner.js:43:19)
+    at promise.then (/Users/sandeepsoni/src/vci-ofa-data-transfer-test/node_modules/jest-jasmine2/build/queue_runner.js:87:41)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:189:7)]]></failure>
+    </testCase>
   </file>
 </testExecutions>

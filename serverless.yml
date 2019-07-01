@@ -21,13 +21,13 @@ functions:
       - http:
           method: get
           path: getdata
-  postdata:        
-    handler: handler.postdata
+  datatransfer:        
+    handler: handler.datatransfer
     timeout: 5
     events:
       - http:
           method: post
-          path: postdata       
+          path: datatransfer       
 custom:
   serverless-offline:
     # httpsProtocol: "dev-certs"
