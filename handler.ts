@@ -5,15 +5,40 @@ import dataService from './services/dataservices';
 import * as Models from './models';
 import uuid from 'uuid/v4';
 
+import redis from 'redis';
+var client = redis.createClient();
+
 export const getdata: APIGatewayProxyHandler = async (event:any, _context:any) => {
   const queryParams = event.queryStringParameters.id;
   console.log('queryParams', queryParams);
   const getDataResponce = dataService.getDataByIdFromObj(queryParams, dataService.userPostedData);
-  return {
+
+  client.on('connect', function() {
+    console.log('Redis client connected');
+  });
+
+  client.on('error', function (err) {
+    console.log('Something went wrong ' + err);
+  });
+
+  let getDataResponceFromRedis;
+
+  client.get(queryParams, function (error, result) {
+    if (error) {
+        console.log(error);
+        throw error;
+    }
+    console.log('queryParams ->' + queryParams);
+    console.log('GET result ->' + result);
+    getDataResponceFromRedis = result;
+});
+
+return {
     statusCode: ParseResponseCode(getDataResponce),
     body: JSON.stringify({
       message: 'function executed successfully!',
-      data:  getDataResponce
+      datafromredis:  getDataResponceFromRedis,
+      data: getDataResponce
     }, null, 2),
   };
 }
@@ -23,6 +48,19 @@ export const datatransfer: APIGatewayProxyHandler = async (event:any, _context:a
   const resId = uuid();
   console.log('userData', userData);
   dataService.saveUserData(userData, resId);
+
+  client.on('connect', function() {
+    console.log('Redis client connected');
+  });
+
+  client.on('error', function (err) {
+    console.log('Something went wrong ' + err);
+  });
+
+  
+
+client.set(resId, userData, redis.print);
+
   return {
     statusCode: ParseResponseCode(userData),
     body: JSON.stringify({
@@ -47,3 +85,6 @@ function ParseResponseCode(dataResponse: Models.VehicleInfoResponse): number {
   }
   return 500;
 }
+
+
+

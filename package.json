@@ -10,6 +10,7 @@
     "dependencies": {
         "jest-junit": "^6.3.0",
         "jest-sonar-reporter": "^2.0.0",
+        "redis": "^2.8.0",
         "serverless": "^1.36.3",
         "sonarqube-scanner": "^2.4.0",
         "source-map-support": "^0.5.10",
