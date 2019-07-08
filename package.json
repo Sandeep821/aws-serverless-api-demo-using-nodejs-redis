@@ -8,6 +8,7 @@
         "local": "SET DEBUG=* && serverless offline --env=dev -s dev && node --inspect"
     },
     "dependencies": {
+        "bluebird": "^3.5.5",
         "jest-junit": "^6.3.0",
         "jest-sonar-reporter": "^2.0.0",
         "redis": "^2.8.0",

@@ -4,9 +4,13 @@ import 'source-map-support/register';
 import dataService from './services/dataservices';
 import * as Models from './models';
 import uuid from 'uuid/v4';
+import bluebird from 'bluebird';
 
 import redis from 'redis';
+bluebird.promisifyAll(redis);
 var client = redis.createClient();
+
+
 
 export const getdata: APIGatewayProxyHandler = async (event:any, _context:any) => {
   const queryParams = event.queryStringParameters.id;
@@ -21,24 +25,29 @@ export const getdata: APIGatewayProxyHandler = async (event:any, _context:any) =
     console.log('Something went wrong ' + err);
   });
 
-  let getDataResponceFromRedis;
-
-  client.get(queryParams, function (error, result) {
+ /*  let getDataResponceFromRedis =  client.get(queryParams, function (error, result) {
     if (error) {
         console.log(error);
         throw error;
     }
     console.log('queryParams ->' + queryParams);
     console.log('GET result ->' + result);
-    getDataResponceFromRedis = result;
+    return result;
+}); */
+
+
+let getDataResponceFromRedis =  client.getAsync(queryParams).then(function(res) {
+  console.log('getDataResponceFromRedis', res); 
+  return JSON.stringify(res);
 });
 
+let dataFromRedis = await getDataResponceFromRedis;
+
 return {
-    statusCode: ParseResponseCode(getDataResponce),
+    statusCode: ParseResponseCode(dataFromRedis),
     body: JSON.stringify({
       message: 'function executed successfully!',
-      datafromredis:  getDataResponceFromRedis,
-      data: getDataResponce
+      data: await dataFromRedis
     }, null, 2),
   };
 }
@@ -59,13 +68,18 @@ export const datatransfer: APIGatewayProxyHandler = async (event:any, _context:a
 
   
 
-client.set(resId, userData, redis.print);
+const setDataOnRedis  = client.set(resId, userData);
+
+
+
+
+console.log('setDataOnRedis', setDataOnRedis);
 
   return {
     statusCode: ParseResponseCode(userData),
     body: JSON.stringify({
       message: 'data posted successfully!',
-      responce:  {postedData: JSON.stringify(userData), appId: resId}
+      responce:  {postedData: setDataOnRedis, appId: resId}
     }, null, 2),
   };
 }
