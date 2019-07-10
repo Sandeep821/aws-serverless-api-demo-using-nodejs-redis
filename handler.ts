@@ -8,14 +8,14 @@ import bluebird from 'bluebird';
 
 import redis from 'redis';
 bluebird.promisifyAll(redis);
-var client = redis.createClient();
+const client = redis.createClient();
 
 
 
-export const getdata: APIGatewayProxyHandler = async (event:any, _context:any) => {
+export const getdata: APIGatewayProxyHandler = async (event:any) => {
   const queryParams = event.queryStringParameters.id;
   console.log('queryParams', queryParams);
-  const getDataResponce = dataService.getDataByIdFromObj(queryParams, dataService.userPostedData);
+ // const getDataResponce = dataService.getDataByIdFromObj(queryParams, dataService.userPostedData);
 
   client.on('connect', function() {
     console.log('Redis client connected');
@@ -25,20 +25,10 @@ export const getdata: APIGatewayProxyHandler = async (event:any, _context:any) =
     console.log('Something went wrong ' + err);
   });
 
- /*  let getDataResponceFromRedis =  client.get(queryParams, function (error, result) {
-    if (error) {
-        console.log(error);
-        throw error;
-    }
-    console.log('queryParams ->' + queryParams);
-    console.log('GET result ->' + result);
-    return result;
-}); */
-
 
 let getDataResponceFromRedis =  client.getAsync(queryParams).then(function(res) {
   console.log('getDataResponceFromRedis', res); 
-  return JSON.stringify(res);
+  return res;
 });
 
 let dataFromRedis = await getDataResponceFromRedis;
